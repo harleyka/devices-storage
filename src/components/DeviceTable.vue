@@ -10,11 +10,7 @@
 <script setup lang="ts">
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
-import axios from 'axios';
-import { ref } from "vue";
+import { useFetch } from "@/composables/useFetch";
 
-const devices = ref<Device[]>([]);
-
-const response = await axios.get('http://127.0.0.1:8081/list');
-devices.value = response.data;
+const { data: devices } = await useFetch('http://127.0.0.1:8081/list');
 </script>
