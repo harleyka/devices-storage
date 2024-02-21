@@ -19,3 +19,7 @@
         /* CSS to Reset */
     }
 }
+
+html, body {
+    overflow: hidden;
+}

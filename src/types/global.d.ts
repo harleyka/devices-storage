@@ -6,6 +6,13 @@ declare global {
         hostname: string
         device_type: DeviceType
         os_type: OSType
+        owner_name: string
+    }
+
+    interface DeviceResponse {
+        hostname: string
+        device_type: DeviceType
+        os_type: OSType
         owner: string
     }
 }

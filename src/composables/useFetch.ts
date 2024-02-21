@@ -28,8 +28,6 @@ export const useFetch = async <T>(url: string, options?: Record<'method' | 'data
 
             state.data = await response.data;
         } catch (err) {
-            const typedError = err as Error;
-            console.log(axios.isAxiosError(err));
             state.hasError = true;
             state.errorMessage = err.response.data;
         } finally {
