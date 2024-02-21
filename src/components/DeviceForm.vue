@@ -1,35 +1,32 @@
 <template>
-  <Card>
-    <template #title>Přidat zařízení</template>
-    <template #content>
+  <div>
       <Message v-if="success" severity="success" :life="1000">Zařízení bylo úspěšně přidáno.</Message>
       <Message v-if="error" severity="error">{{ error }}</Message>
+
       <form id="device-form" class="flex flex-col gap-2" @submit="saveForm" ref="deviceForm">
         <div class="flex flex-col gap-2">
           <label for="username">Hostname</label>
-          <InputText id="username" v-model="formData.hostname" />
+          <InputText id="username" v-model="formData.hostname" :disabled="success" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="deviceType">Typ zařízení</label>
-          <Dropdown id="deviceType" v-model="formData.device_type" :options="deviceTypes" />
+          <Dropdown id="deviceType" v-model="formData.device_type" :options="deviceTypes" :disabled="success" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="osType">Typ OS</label>
-          <Dropdown id="osType" v-model="formData.os_type" :options="osTypes" />
+          <Dropdown id="osType" v-model="formData.os_type" :options="osTypes" :disabled="success" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="owner">Vlastník</label>
-          <InputText id="owner" v-model="formData.owner_name" />
+          <InputText id="owner" v-model="formData.owner_name" :disabled="success" />
         </div>
-        <Button class="mx-auto" label="Uložit" @click="saveForm" />
+        <Button class="mx-auto" label="Uložit" @click="saveForm" :disabled="success" />
       </form>
-    </template>
-  </Card>
+  </div>
 </template>
 
 <script setup lang="ts">
 import Button from 'primevue/button';
-import Card from 'primevue/card';
 import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
@@ -52,11 +49,6 @@ const formData = reactive({
   owner_name: ''
 })
 
-const hostname = ref<string>('');
-const deviceType = ref<DeviceType>('pc');
-const osType = ref<OSType>('win');
-const owner = ref<string>('');
-
 const error = ref<string>();
 const success = ref<boolean>(false);
 
@@ -65,7 +57,6 @@ const saveForm = async () => {
 
   if (!hasError.value) {
     success.value = true;
-    deviceForm.value?.reset();
     emit('reloadTable');
   } else {
     error.value = errorMessage.value;
