@@ -29,7 +29,7 @@ export const useFetch = async <T>(url: string, options?: Record<'method' | 'data
             state.data = await response.data;
         } catch (err) {
             state.hasError = true;
-            state.errorMessage = err.response.data;
+            state.errorMessage = err.response.status === 500 ? 'Internal server error' : err.response.data;
         } finally {
             state.isLoading = false;
         }

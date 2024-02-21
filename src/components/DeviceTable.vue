@@ -1,9 +1,9 @@
 <template>
-    <DataTable :value="devices" sortMode="multiple" stripedRows tableStyle="min-width: 50rem" scrollHeight="80vh" scrollable>
-      <Column class="w-1/4" field="hostname" header="Hostname"></Column>
-      <Column class="w-1/4" field="device_type" header="Typ zařízení"></Column>
-      <Column class="w-1/4" field="os_type" header="Typ OS"></Column>
-      <Column class="w-1/4" field="owner" header="Vlastník"></Column>
+    <DataTable :value="devices" sortField="owner" :sortOrder="-1"  stripedRows tableStyle="min-width: 50rem" scrollHeight="80vh" scrollable>
+      <Column class="w-1/4" field="hostname" header="Hostname" sortable></Column>
+      <Column class="w-1/4" field="device_type" header="Typ zařízení" sortable></Column>
+      <Column class="w-1/4" field="os_type" header="Typ OS" sortable></Column>
+      <Column class="w-1/4" field="owner" header="Vlastník" sortable></Column>
     </DataTable>
 </template>
 
