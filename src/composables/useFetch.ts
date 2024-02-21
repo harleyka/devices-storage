@@ -9,7 +9,7 @@ interface State<T> {
 }
 
 export const useFetch = async <T>(url: string, options?: Record<'method' | 'data', unknown>) => {
-    const state = reactive({
+    const state = reactive<State<T>>({
         isLoading: false,
         hasError: false,
         errorMessage: '',
