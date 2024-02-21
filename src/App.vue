@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col justify-between h-screen">
-    <header class="fixed h-20 w-full z-10 shadow-md flex justify-start bg-white">
-      <img alt="Vue logo" class="ml-4 mr-16 my-auto" src="./assets/logo.svg" width="50" height="50" />
+    <header class="fixed h-20 w-full z-10 shadow-md flex  bg-white">
+      <img alt="Vue logo" class="ml-4 flex-0 my-auto" src="./assets/logo.svg" width="50" height="50" />
 
-      <div class="my-auto">
-        <h1 class="text-xl font-bold">Devices storage</h1>
+      <div class="flex-1 my-auto text-center">
+        <h1 class="text-xl font-bold">{{ $t('devices-storage') }}</h1>
       </div>
 
-      <Button class="ml-auto mr-4 my-auto" label="Přidej" @click="showForm = true" />
+      <Button class="flex-0 mr-4 my-auto" :label="$t('add')" @click="showForm = true" />
     </header>
 
     <main class="flex flex-col flex-1 w-full mt-20 pt-4 bg-gray-200">
@@ -19,22 +19,22 @@
             </template>
             <template #fallback>
               <DataTable :value="[{}, {}, {}, {}]" stripedRows tableStyle="min-width: 50rem">
-                <Column class="w-1/4" field="hostname" header="Hostname">
+                <Column class="w-1/4" field="hostname" :header="$t('hostname')">
                   <template #body>
                     <Skeleton height="2rem"></Skeleton>
                   </template>
                 </Column>
-                <Column class="w-1/4" field="device_type" header="Typ zařízení">
+                <Column class="w-1/4" field="device_type" :header="$t('device-type')">
                   <template #body>
                     <Skeleton height="2rem"></Skeleton>
                   </template>
                 </Column>
-                <Column class="w-1/4" field="os_type" header="Typ OS">
+                <Column class="w-1/4" field="os_type" :header="$t('os-type')">
                   <template #body>
                     <Skeleton height="2rem"></Skeleton>
                   </template>
                 </Column>
-                <Column class="w-1/4" field="owner" header="Vlastník">
+                <Column class="w-1/4" field="owner" :header="$t('owner')">
                   <template #body>
                     <Skeleton height="2rem"></Skeleton>
                   </template>
@@ -45,7 +45,7 @@
         </template>
       </Card>
 
-      <Dialog v-model:visible="showForm" header="Přidat zařízení" :style="{ width: '50%' }" :modal="true" :draggable="false">
+      <Dialog v-model:visible="showForm" :header="$t('add-device')" :style="{ width: '50%' }" :modal="true" :draggable="false">
         <DeviceForm @reload-table="reloadTable" />
       </Dialog>
     </main>
