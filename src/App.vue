@@ -12,6 +12,30 @@
       <template #default>
         <DeviceTable :key="tableKey" />
       </template>
+      <template #fallback>
+        <DataTable :value="[{}, {}, {}, {}]" stripedRows tableStyle="min-width: 50rem">
+          <Column class="w-1/4" field="hostname" header="Hostname">
+            <template #body>
+              <Skeleton height="2rem"></Skeleton>
+            </template>
+          </Column>
+          <Column class="w-1/4" field="device_type" header="Typ zařízení">
+            <template #body>
+              <Skeleton height="2rem"></Skeleton>
+            </template>
+          </Column>
+          <Column class="w-1/4" field="os_type" header="Typ OS">
+            <template #body>
+              <Skeleton height="2rem"></Skeleton>
+            </template>
+          </Column>
+          <Column class="w-1/4" field="owner" header="Vlastník">
+            <template #body>
+              <Skeleton height="2rem"></Skeleton>
+            </template>
+          </Column>
+        </DataTable>
+      </template>
     </Suspense>
     <Divider />
     <Button class="mb-4" label="Přidej" @click="showForm = true" />
@@ -21,7 +45,10 @@
 
 <script setup lang="ts">
 import Button from 'primevue/button';
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
 import Divider from 'primevue/divider';
+import Skeleton from 'primevue/skeleton';
 import { ref } from "vue";
 import DeviceForm from "@/components/DeviceForm.vue";
 import DeviceTable from "@/components/DeviceTable.vue";

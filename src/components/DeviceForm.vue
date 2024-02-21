@@ -3,13 +3,11 @@
     <template #title>Přidat zařízení</template>
     <template #content>
       <Message v-if="success" severity="success" :life="1000">Zařízení bylo úspěšně přidáno.</Message>
-
       <Message v-if="error" severity="error">{{ error }}</Message>
       <form id="device-form" class="flex flex-col gap-2" @submit="saveForm" ref="deviceForm">
         <div class="flex flex-col gap-2">
           <label for="username">Hostname</label>
-          <InputText id="username" v-model="hostname" aria-describedby="hostname-help" />
-          <small id="hostname-help">Enter your hostname.</small>
+          <InputText id="username" v-model="hostname" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="deviceType">Typ zařízení</label>
@@ -36,7 +34,7 @@ import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import { ref } from "vue";
-import axios, {AxiosError} from "axios";
+import axios, { AxiosError } from "axios";
 
 const deviceTypes: DeviceType[] = ['pc', 'laptop', 'mobile'];
 const osTypes: OSType[] = ['win', 'lin', 'macOS', 'iOS', 'android'];
@@ -66,7 +64,6 @@ const saveForm = async () => {
       owner_name: owner.value
     });
 
-    console.log(response);
     if (response.status === 200) {
       success.value = true;
       deviceForm.value?.reset();
@@ -79,7 +76,6 @@ const saveForm = async () => {
     } else {
       error.value = (err as AxiosError).response.data as string;
     }
-
   }
 }
 </script>
